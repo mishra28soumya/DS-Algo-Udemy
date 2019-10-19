@@ -1,3 +1,5 @@
+import java.io.*;
+
 class LinkedList{
 
     Node head;
@@ -64,10 +66,29 @@ class LinkedList{
             System.out.print(temp_node.data+" ");
             temp_node  =temp_node.next;
         }
+        System.out.println();
     }
 
-    public static void main(String args[]){
-        System.out.println("Start");
+    //search for a node 
+    public void search(int key){
+
+        Node temp_node = head;
+
+        while(temp_node != null){
+            if(temp_node.data == key){
+                System.out.println("Node found!");
+                return;
+            }
+            temp_node = temp_node.next;
+        }
+        System.out.println("Node not found!");
+    }
+
+
+    public static void main(String args[])throws IOException{
+
+        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+
         LinkedList list = new LinkedList();
         list.append(4);
         list.push(2);
@@ -77,5 +98,10 @@ class LinkedList{
 
         System.out.println("\nCreated linked list is: ");
         list.printList();
+
+        System.out.println("Enter a key to search");
+        int key = Integer.parseInt(in.readLine());
+        list.search(key);
+        
     }
 }
