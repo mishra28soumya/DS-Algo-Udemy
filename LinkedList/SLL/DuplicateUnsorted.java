@@ -1,10 +1,12 @@
 //To remove duplicate elements from an unsorted linked list
-class LinkedList
+import java.util.HashSet;
+
+class DuplicateUnsorted
 {
 
     Node head;
 
-    class Node
+    static class Node
     {
         int data;
         Node next;
@@ -16,20 +18,48 @@ class LinkedList
     }
 
     //Using hashing
-    void removeDupicates()
+    static void removeDupicates(Node head)
     {
-        Node ptr1 = head, ptr2 = null;
+       HashSet<Integer> hs = new HashSet<>();
+       Node current = head;
+       Node prev = null;
 
-        while(ptr1 != null && ptr1.next !=  null)
+       while(current!=null)
+       {
+           int currval = current.data;
+           if(hs.contains(currval))
+           {
+               prev.next = current.next;
+           }
+           else
+           {
+               hs.add(currval);
+               prev = current;
+           }
+           current = current.next;
+       }
+    }
+
+    static void printList(Node head)
+    {
+        Node temp = head;
+        while(temp!=null)
         {
-            ptr2 = ptr1;
-            while(ptr2.next != null)
-            {
-                if(ptr2.data == ptr2.data.next)
-                {
-                    ptr2 = ptr2
-                }
-            }
+            System.out.print(temp.data + " ");
+            temp = temp.next;
         }
+    }
+
+    public static void main(String[] args)
+    {
+        Node start = new Node(10);
+        start.next =new Node(12);
+        start.next.next =new Node(12);
+        start.next.next.next =new Node(11);
+
+        removeDupicates(start);
+        printList(start);
+
+
     }
 }
